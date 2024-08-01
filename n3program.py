@@ -24,8 +24,10 @@ y_pred = clf.fit_predict(data)
 X_scores = clf.negative_outlier_factor_
 
 sorted_indices = np.argsort(np.array(X_scores))[:10]
+outliers = []
 for i in sorted_indices:
-    print(data[i][0])
+    outliers.append(data[i][0])
+print(outliers)
 
 
 dataArray = np.array(data)[:, 1:]

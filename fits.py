@@ -1,5 +1,8 @@
-'''from astropy.io import fits
+from astropy.io import fits
 import csv
+
+outliers = [1464623,1270774,1463827,1463319,202709,203039,1462759,203220,1270128,694250]
+
 
 # Open the FITS file
 with fits.open('COSMOS2020_CLASSIC_R1_v2.2_p3.fits') as hdul:
@@ -17,16 +20,4 @@ with fits.open('COSMOS2020_CLASSIC_R1_v2.2_p3.fits') as hdul:
 with open('subset_indexed.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     # Writing the data
-    writer.writerows(subset)'''
-
-
-import pandas as pd
-
-# Load the CSV file
-df = pd.read_csv('cleaned_indexed_subset2.csv')
-
-# Find the number of rows
-num_rows = df.shape[0]
-
-# Print the number of rows
-print(f'The number of rows in the CSV file is: {num_rows}')
+    writer.writerows(subset)

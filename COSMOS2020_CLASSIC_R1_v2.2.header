@@ -1,0 +1,404 @@
+The CLASSIC COSMOS2020 photometric catalog
+
+We present here the catalog containing the photometry extracted with SExtractor and IRACLEAN, 
+for about 1,700,000 sources in the COSMOS field. The photometry from optical/NIR was extracted
+from PSF-homogenized images, with a target PSF set to a Moffat profile with parameters (0.8",2.5).
+The full description of this catalog is in Weaver et al., 2022a (ApJS 258 11)
+
+Updated 02/2022
+Contact: john.weaver.astro@gmail.com
+
+
+########################################################
+Identification
+########################################################
+
+Identifier
+#   name = 'ID'
+
+Right Ascension and Declination
+#   name = 'ALPHA_J2000'; unit = 'deg'
+#   name = 'DELTA_J2000'; unit = 'deg'
+
+Position
+#   name = 'X_IMAGE'; unit = 'pixel'
+#   name = 'Y_IMAGE'; unit = 'pixel'
+#   name = 'ERRX2_IMAGE'; unit = 'pixel'
+#   name = 'ERRY2_IMAGE'; unit = 'pixel'
+#   name = 'ERRXY_IMAGE'; unit = 'pixel'
+
+Radius of circle enclosing 50% of total flux from the PSF-homogenized Ks band image
+#   name = 'FLUX_RADIUS'; unit = 'pixel'  
+Reduced pseudo-radius derived from the izYJHKs area of the detection image
+#   name = 'KRON_RADIUS'; unit = 'unitless'  
+
+########################################################
+Flags
+########################################################
+
+Flags are computed from the region files included with the release
+
+Flag for the bright stars and edges of the HSC images
+#   name = 'FLAG_HSC'      (0:clean, 1:masked)
+
+Flag for the bright stars and edges of the Suprime-Cam images
+#   name = 'FLAG_SUPCAM'   (0:clean, 1:masked)
+
+Flag for the UltraVISTA region
+#   name = 'FLAG_UVISTA'   (0:inside, 1:outside)
+
+Flag for the UltraVISTA ultra-deep regions
+#   name = 'FLAG_UDEEP'    (0:ultra-deep, 1:deep)
+
+Flag for the combination of FLAG_UVISTA, FLAG_HSC and FLAG_SUPCAM
+#   name = 'FLAG_COMBINED' (0:clean and inside UVISTA)
+
+########################################################
+Galactic extinction at the object position
+########################################################
+
+E(B-V) values from Schlegel, Finkbeiner & Davis (1998) dust map
+By default, a scaling of 0.86 is applied to the map values 
+to reflect the recalibration by Schlafly & Finkbeiner (2011)
+
+#   name = 'EBV_MW'; unit = 'mag'
+
+########################################################
+Photometry
+########################################################
+
+No data convention
+flux, fluxerr, mag, magerr = NaN
+
+Negative flux convention
+mag, magerr = NaN
+
+NOTE: The photometry are not corrected for Milky Way extinction.
+NOTE: The photometry are not corrected for photometric offsets derived by LePhare or EAZY
+NOTE: The aperture photometry errors are corrected for the correlated noise in the images.
+
+########################################################
+
+List of bands
+CFHT/MegaCam (CLAUDS): 
+  CFHT_ustar, CFHT_u
+Subaru/Hyper Suprime-Cam (HSC SSP DR2): 
+  HSC_g, HSC_r, HSC_i, HSC_z, HSC_y
+VISTA/VIRCAM (UltraVISTA DR4): 
+  UVISTA_Y, UVISTA_J, UVISTA_H, UVISTA_Ks, UVISTA_NB118
+Subaru/Suprime-Cam: 
+  SC_IB427, SC_IB464, SC_IA484, SC_IB505, SC_IA527, SC_IB574, SC_IA624, 
+  SC_IA679, SC_IB709, SC_IA738, SC_IA767, SC_IB827, SC_NB711, SC_NB816, 
+  SC_B, SC_gp, SC_V, SC_rp, SC_ip, SC_zp, SC_zpp
+
+NOTE: SC_gp is not used for photo-z. See paper for details.
+
+2" diameter aperture fluxes, flux errors, magnitudes and magnitude errors
+#   name = '###_FLUX_APER2';    unit = 'uJy'
+#   name = '###_FLUXERR_APER2'; unit = 'uJy'
+#   name = '###_MAG_APER2';    unit = 'mag'
+#   name = '###_MAGERR_APER2'; unit = 'mag'
+
+3" diameter aperture fluxes, flux errors, magnitudes and magnitude errors
+#   name = '###_FLUX_APER3';    unit = 'uJy'
+#   name = '###_FLUXERR_APER3'; unit = 'uJy'
+#   name = '###_MAG_APER3';    unit = 'mag'
+#   name = '###_MAGERR_APER3'; unit = 'mag'
+
+Kron aperture fluxes, flux errors, magnitudes and magnitude errors
+#   name = '###_FLUX_AUTO';    unit = 'uJy'
+#   name = '###_FLUXERR_AUTO'; unit = 'uJy'
+#   name = '###_MAG_AUTO';    unit = 'mag'
+#   name = '###_MAGERR_AUTO'; unit = 'mag'
+
+Isophotal magnitudes and magnitude errors
+#   name = '###_MAG_ISO';    unit = 'mag'
+#   name = '###_MAGERR_ISO'; unit = 'mag'
+
+########################################################
+
+Internal flags from SExtractor, combined into a single number by adding the values (1, 2, 4, ...) for the flags listed below:
+#  name = '###_FLAGS'
+
+ 1  The object has neighbours, bright and close enough to significantly bias the
+     MAG_AUTO photometry, or bad pixels (more than 10% of the integrated area affected),
+ 2  The object was originally blended with another one,
+ 4  At least one pixel of the object is saturated (or very close to),
+ 8  The object is truncated (too close to an image boundary),
+ 16 Object's aperture data are incomplete or corrupted,
+ 32 Object's isophotal data are incomplete or corrupted,
+ 64 A memory overflow occurred during deblending,
+ 128 A memory overflow occurred during extraction.
+
+External flag from SExtractor, with the used external flag image being one having a value of 4 for saturated pixels 
+and 0 otherwise, so this column will have a value of 4 if there were saturated pixel(s) in the isophotal area of the object
+#  name = '###_IMAFLAGS_ISO
+
+########################################################
+
+Aperture-to-total magnitude corrections for 2" and 3" diameter aperture photometry, respectively
+To be added to ###_MAG_APER# to get total magnitudes
+#   name = 'total_off2'; unit = 'mag'
+#   name = 'total_off3'; unit = 'mag'
+
+########################################################
+
+List of bands
+Spitzer/IRAC (Cosmic DAWN Survey): 
+  IRAC_CH1, IRAC_CH2
+
+IRACLEAN fluxes, flux errors, magnitudes and magnitude errors
+#   name = '###_FLUX';    unit = 'uJy'
+#   name = '###_FLUXERR'; unit = 'uJy'
+#   name = '###_MAG';    unit = 'mag'
+#   name = '###_MAGERR'; unit = 'mag'
+
+NOTE: IRACLEAN photometry of IRAC_CH3 and IRAC_CH4 are not extracted with IRACLEAN
+
+####################################################
+Ancillary photometry
+
+NOTE: All are matched within 0.6" radius
+####################################################
+
+GALEX photometry (Zamojski et al. 2007) from the Capak et al. 2007 catalog
+
+Matched identifier
+#   name = 'ID_GALEX'
+
+List of bands
+  GALEX_NUV, GALEX_FUV
+
+#   name = '###_FLUX';    unit = 'uJy'
+#   name = '###_FLUXERR'; unit = 'uJy'
+#   name = '###_MAG';    unit = 'mag'
+#   name = '###_MAGERR'; unit = 'mag'
+
+####################################################
+
+SPLASH photometry from the COSMOS2015 catalog (Laigle et al. 2016)
+
+Matched identifier
+#   name = 'ID_COSMOS2015'
+
+List of bands
+  SPLASH_CH1, SPLASH_CH2, SPLASH_CH3, SPLASH_CH4
+
+#   name = '###_FLUX';    unit = 'uJy'
+#   name = '###_FLUXERR'; unit = 'uJy'
+#   name = '###_MAG';    unit = 'mag'
+#   name = '###_MAGERR'; unit = 'mag'
+
+####################################################
+
+HST/ACS catalog (Leauthaud et al. 2007)
+selection: CLEAN == 1
+
+Matched identifier
+#   name = 'ID_ACS'
+
+ACS photometry
+#   name = 'ACS_F814W_FLUX';    unit = 'uJy'
+#   name = 'ACS_F814W_FLUXERR'; unit = 'uJy'
+#   name = 'ACS_F814W_MAG';    unit = 'mag'
+#   name = 'ACS_F814W_MAGERR'; unit = 'mag'
+
+ACS morphology
+#   name = 'ACS_A_WORLD'; unit = 'deg'
+#   name = 'ACS_B_WORLD'; unit = 'deg'
+#   name = 'ACS_THETA_WORLD'; unit = 'deg'
+#   name = 'ACS_FWHM_WORLD'; unit = 'deg'
+#   name = 'ACS_MU_MAX'; unit = 'mag'
+#   name = 'ACS_MU_CLASS'
+
+####################################################
+
+Chandra COSMOS-Legacy Survey (Civano et al. 2016, Marchesi et al. 2016)
+
+Matched identifier
+#   name = 'ID_CHANDRA'
+
+####################################################
+
+Corresponding Farmer source
+
+Matched identifier
+#   name = 'ID_FARMER'
+
+####################################################
+Le Phare photo-z and physical parameters
+####################################################
+# NOTE: MW correction derived from Schlafly&Finkbeiner+2011 values assuming Allen+1976 reddening
+
+Photometric Redshift
+Derived using a method similar to Ilbert et al. (2009, 2013)
+#  name = 'lp_zBEST'      
+ 
+   z = zPDF  if galaxy  (median of the likelihood distribution)
+   z = NaN   if star, Xray source based on Chandra (Civiano program), or masked area (FLAG_HSC|FLAG_SC|FLAG_UVISTA)
+
+Star/Galaxy Separation
+See paper for details
+#  name = 'lp_type'       
+
+    type=0   if galaxy
+    type=1   if star (mainly 3.6 micron, and half-light radius in HSC and HST)
+    type=2   if Xray source
+    type=-9  if failure in the fit (most of these objects have less than 1 band)
+
+
+
+Best fit obtained with the galaxy templates
+#  name = 'lp_zPDF'           photo-z measured using the galaxy templates. Median of the likelihood distribution.
+#  name = 'lp_zPDF_l68'       lower limit, 68% confidence level 
+#  name = 'lp_zPDF_u68'       upper limit, 68% confidence level 
+
+#  name = 'lp_zMinChi2'       photo-z measured using galaxy templates. Photo-z defines as the minimum of the chi2 distribution.
+#  name = 'lp_chi2_best'      reduced chi2 (-99 if less than 3 filters) for zMinChi2
+
+#  name = 'lp_zp_2'           second photo-z solution if a second peak is detected with P>5% in the PDF
+#  name = 'lp_chi2_2'         reduced chi2 for the second photo-z solution
+
+#  name = 'lp_NbFilt'         Number of filters used in the fit
+
+NOTE: Every source has a redshift, regardless of the type or if it is in a masked area or not
+
+########################################################
+
+Best fit obtained with the AGN templates
+#  name = 'lp_zq'             photoz for the AGN library.  
+#  name = 'lp_chiq'           reduced chi2 
+#  name = 'lp_modq'           best fit template
+
+NOTE: This value is only informative: no correction for variability is applied. 
+
+########################################################
+
+Best fit obtained with the STAR templates 
+
+#  name = 'lp_mods'           model for the star library
+#  name = 'lp_chis'           reduced chi2
+
+########################################################
+
+Corresponding mask flag if masked by FLAG_UVISTA | FLAG_HSC | FLAG_SC
+
+#  name = 'lp_mask'
+
+########################################################
+
+Physical Properties
+Derived from the BC03 best-fit templates at zPDF 
+(Chabrier IMF; cosmo:70,0.3,0.7; BC03 tau+delayed models described in Ilbert et al. 2015).
+NOTE: A value is computed for all sources, even the one in masked area or classified as star
+
+Best fit BC03 model at zPDF
+#  name = 'lp_model'			best-fit model index
+#  name = 'lp_age'			age of best-fit template in years
+#  name = 'lp_dust'			best-fit color excess E(B-V)
+#  name = 'lp_Attenuation'		best-fit dust law index
+
+Absolute rest-frame AB magnitudes
+#  name = 'lp_MFUV'                 FUV galex  
+#  name = 'lp_MNUV'                 NUV galex
+#  name = 'lp_MU'                   U  cfht new
+#  name = 'lp_MG'                   g  Subaru HSC
+#  name = 'lp_MR'                   r  Subaru HSC    
+#  name = 'lp_MI'                   i  Subaru HSC 
+#  name = 'lp_MZ'                   z  Subaru HSC  
+#  name = 'lp_MY'                   Y VISTA 
+#  name = 'lp_MJ'                   J VISTA 
+#  name = 'lp_MH'                   H VISTA
+#  name = 'lp_MK'                   Ks VISTA
+
+Galaxy Stellar Mass
+#  name = 'lp_mass_med'           log Stellar mass from BC03 best-fit template. median of the PDF 
+#  name = 'lp_mass_med_min68'     lower limit, 68% confidence level
+#  name = 'lp_mass_med_max68'     upper limit, 68% confidence level
+#  name = 'lp_mass_best'          log Stellar mass from BC03 best-fit template. Taken at the minimum chi2
+
+SFR and sSFR  
+#  name = 'lp_SFR_med'            log SFR from BC03 best-fit template. median of the PDF 
+#  name = 'lp_SFR_med_min68'      lower limit, 68% confidence level
+#  name = 'lp_SFR_med_max68'      upper limit, 68% confidence level
+#  name = 'lp_SFR_best'           log SFR from BC03 best-fit template. Taken at the minimum chi2
+
+#  name = 'lp_sSFR_med'            log sSFR from BC03 best-fit template. median of the PDF 
+#  name = 'lp_sSFR_med_min68'      lower limit, 68% confidence level
+#  name = 'lp_sSFR_med_max68'      upper limit, 68% confidence level
+#  name = 'lp_sSFR_best'           log sSFR from BC03 best-fit template. Taken at the minimum chi2
+
+NOTE: SFR and sSFR is computed without IR, large uncertainties with such methods
+
+####################################################
+EAZY photo-z and physical parameters
+####################################################
+NOTE: EAZY uses one value of Galactic extinction for all sources: E(B-V) = 0.017
+
+Photometric redshift
+Derived using the latest development version of eazy-py. See paper for details.
+#  name = 'ez_z_phot'              maximum a-posteriori photometric redshift
+#  name = 'ez_z_phot_chi2'         chi2 at z_phot, with z-prior
+#  name = 'ez_z_phot_risk'         risk parameter from Tanaka+2018; R(ez_z_phot)
+#  name = 'ez_z_min_risk'          redshift where R(z) is minimised
+#  name = 'ez_min_risk'	    	R(ez_z_min_risk)
+#  name = 'ez_z_raw_chi2'		redshift where chi2 is minimised, without priors
+#  name = 'ez_raw_chi2'		chi2 at ez_z_raw_chi2  
+
+Redshift probability distribution percentiles
+#  name = 'ez_z###'			025, 160, 500, 840, 975 corresponds to 2.5%, 16%, 50%, 84%, 97.5%
+
+Fitting parameters
+#  name = 'ez_nusefilt'		number of filters used for photo-z (i.e., not masked as missing data)
+#  name = 'ez_lc_min'		minimum effective wavelength of valid filters, Angstrom
+#  name = 'ez_lc_max'		maximum effective wavelength of valid filters, Angstrom
+
+Best-fit stellar templates
+#  name = 'ez_star_min_chi2'	chi2 of best stellar template fit (BT-SETTL models); assumes 8% systematic uncertainty
+#  name = 'ez_star_teff'	effective temperature of the stellar template; unit = 'K'
+
+########################################################
+
+Physical Properties
+Derived from the FSPS best-fit templates (Chabrier IMF; cosmo:69.4,0.287,0.713 - WMAP9). 
+Dust is applied by hand using the Kriek+Conroy attenuation curve (delta=0)
+Total energy absorbed by this dust screen (energy_abs) is computed, and a corresponding far-IR component is added to 
+the SED using the templates from Magdis+2012.
+
+Absolute rest-frame AB magnitudes
+The templates are used to perform a weighted interpolation of the rest-frame filter by refitting the templates 
+at ez_z_phot but with the uncertainties weighted to favour observed-frame measurements closest to the desired rest-frame band.
+#  name = 'ez_restU'			rest-frame U-band flux (units of catalog fluxes, uJy)
+#  name = 'ez_restU_err'		rest-frame U-band flux uncertainty (units of catalog fluxes, uJy)
+#  name = 'ez_restB'			rest-frame B-band flux (units of catalog fluxes, uJy)
+#  name = 'ez_restB_err'		rest-frame B-band flux uncertainty (units of catalog fluxes, uJy)
+#  name = 'ez_restV'			rest-frame V-band flux (units of catalog fluxes, uJy)
+#  name = 'ez_restV_err'		rest-frame V-band flux uncertainty (units of catalog fluxes, uJy)
+#  name = 'ez_restJ'			rest-frame J-band flux (units of catalog fluxes, uJy)
+#  name = 'ez_restJ_err'		rest-frame J-band flux uncertainty (units of catalog fluxes, uJy)
+
+Miscellaneous properties
+#  name = 'ez_dL'			luminosity distance at z_phot; unit = 'Mpc'
+#  name = 'ez_mass'			log(mass in Msun)
+#  name = 'ez_sfr'			log(sfr in Msun/yr)
+#  name = 'ez_ssfr'			log(ssfr in 1/yr)
+#  name = 'ez_Lv'			log(V-band luminosity in Lsun)
+#  name = 'ez_LIR'			total 8-1000um luminosity in Lsun)
+#  name = 'ez_energy_abs'		implied absorbed energy associated with Av; unit = 'Lsun'
+#  name = 'ez_Lu'			luminosity in U-band; unit = 'Lsun'
+#  name = 'ez_Lj'			luminosity in J-band; unit = 'Lsun'
+#  name = 'ez_L1400'			luminosity tophat filter at 1400 A; unit = 'Lsun'
+#  name = 'ez_L2800'			luminosity tophat filter at 2800 A; unit = 'Lsun'
+#  name = 'ez_LHa'			Ha line luminosity (reddened), unit = 'Lsun'
+#  name = 'ez_LOIII'			OIII line luminosity (reddened), unit = 'Lsun'
+#  name = 'ez_LHb'			Hb line luminosity (reddened), unit = 'Lsun'
+#  name = 'ez_LOII'			OII line luminosity (reddened), unit = 'Lsun'
+#  name = 'ez_MLv'			mass-to-light ratio in V-band; unit = 'Msun/Lsun'
+#  name = 'ez_Av'			extinction in V-band; unit = 'Mag'
+#  name = 'ez_lwAgeV'		light-weighted age in the V-band; unit = 'Gyr'
+
+Property percentiles
+Five percentiles (025, 160, 500, 840, 975 corresponds to 2.5%, 16%, 50%, 84%, 97.5%) are computed for the following properties:
+ez_mass, ez_sfr, ez_ssfr, ez_Lv, ez_LIR, ez_energy_abs, ez_Lu, ez_Lj, ez_L1400, ez_L2800, ez_L2800, ez_Ha, ez_OIII, 
+ez_Hb, ez_OII. All are stated in the same scaling and units as their non-percentile columns.
+#  name = 'ez_XXXX_p###'
