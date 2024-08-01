@@ -23,6 +23,11 @@ clf = LocalOutlierFactor(n_neighbors=20, contamination=0.1)
 y_pred = clf.fit_predict(data)
 X_scores = clf.negative_outlier_factor_
 
+sorted_indices = np.argsort(np.array(X_scores))[:10]
+for i in sorted_indices:
+    print(data[i][0])
+
+
 dataArray = np.array(data)[:, 1:]
 
 plt.scatter(dataArray[:,0], dataArray[:,1], color="k", s=3.0, label="Data points")
