@@ -3,7 +3,6 @@ import numpy as np
 from sklearn.neighbors import LocalOutlierFactor
 import matplotlib.pyplot as plt
 from matplotlib.legend_handler import HandlerPathCollection
-np.random.seed(1)
 import csv
 
 def update_legend_marker_size(handle, orig):
@@ -12,11 +11,11 @@ def update_legend_marker_size(handle, orig):
     handle.set_sizes([20])
 
 data = []
-with open('subset.csv', newline='') as csvfile:
+with open('subset_indexed.csv', newline='') as csvfile:
     csvreader = csv.reader(csvfile)
     
     for row in csvreader:
-        if len(row) == 4:
+        if len(row) == 4 and ('nan' not in row):
             data.append([float(i) for i in row])
 
 clf = LocalOutlierFactor(n_neighbors=20, contamination=0.1)
@@ -26,7 +25,7 @@ X_scores = clf.negative_outlier_factor_
 sorted_indices = np.argsort(np.array(X_scores))[:10]
 outliers = []
 for i in sorted_indices:
-    outliers.append(data[i][0])
+    outliers.append(int(data[i][0]))
 print(outliers)
 
 
